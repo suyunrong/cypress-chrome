@@ -10,12 +10,16 @@ ENV LANG_WHERE US
 ENV ENCODING UTF-8
 ENV LANGUAGE ${LANG_WHICH}_${LANG_WHERE}.${ENCODING}
 ENV LANG ${LANGUAGE}
+ENV TZ "Asia/Shanghai"
 # Layer size: small: ~9 MB
 # Layer size: small: ~9 MB MB (with --no-install-recommends)
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
+    tzdata \
     locales \
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+  && echo $TZ > /etc/TZ \
   && locale-gen ${LANGUAGE} \
   && echo "export LC_ALL=C" >> /root/.bashrc \
-  && dpkg-reconfigure locales \
+  && dpkg-reconfigure --frontend noninteractive locales \
   && rm -rf /var/lib/apt/lists/*
