@@ -1,4 +1,4 @@
-FROM cypress/base:12.1.0
+FROM debian:stretch-slim
 
 #==============================
 # Locale and encoding settings
@@ -12,8 +12,7 @@ ENV LANG ${LANGUAGE}
 # Layer size: small: ~9 MB MB (with --no-install-recommends)
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
-    tzdata \
     locales \
   && locale-gen ${LANGUAGE} \
-  && dpkg-reconfigure --frontend noninteractive locales \
+  && dpkg-reconfigure locales \
   && rm -rf /var/lib/apt/lists/*
