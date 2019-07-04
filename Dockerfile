@@ -1,8 +1,6 @@
-FROM cypress/base:12.1.0
+FROM debian:stretch-slim
 
 USER root
-
-zh_CN.UTF-8
 
 #==============================
 # Locale and encoding settings
