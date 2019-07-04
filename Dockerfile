@@ -32,7 +32,7 @@ ENV LANG ${LANGUAGE}
 # Layer size: small: ~9 MB
 # Layer size: small: ~9 MB MB (with --no-install-recommends)
 RUN apt-get update \
-  && apt-get --no-install-recommends install -y \
+  && apt-get install --no-install-recommends -y \
     language-pack-en \
     tzdata \
     locales \
