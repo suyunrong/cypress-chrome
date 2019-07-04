@@ -1,5 +1,7 @@
 FROM debian:stretch-slim
 
+USER root
+
 #==============================
 # Locale and encoding settings
 #==============================
