@@ -18,7 +18,8 @@ RUN \
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 # Add zip utility - it comes in very handy
-RUN apt-get update && apt-get install -y zip
+RUN apt-get update && apt-get install -y zip \
+  && rm -rf /var/lib/apt/lists/*
 
 #==============================
 # Locale and encoding settings
@@ -30,16 +31,15 @@ ENV LANGUAGE ${LANG_WHICH}_${LANG_WHERE}.${ENCODING}
 ENV LANG ${LANGUAGE}
 # Layer size: small: ~9 MB
 # Layer size: small: ~9 MB MB (with --no-install-recommends)
-RUN apt-get -qqy update \
-  && apt-get -qqy --no-install-recommends install \
+RUN apt-get update \
+  && apt-get --no-install-recommends install -y \
     language-pack-en \
     tzdata \
     locales \
   && locale-gen ${LANGUAGE} \
   && dpkg-reconfigure --frontend noninteractive locales \
   && apt-get -qyy autoremove \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt-get -qyy clean
+  && rm -rf /var/lib/apt/lists/*
 
 # avoid too many progress messages
 # https://github.com/cypress-io/cypress/issues/1243
