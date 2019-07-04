@@ -14,5 +14,7 @@ RUN apt-get update \
   && apt-get install --no-install-recommends -y \
     locales \
   && locale-gen ${LANGUAGE} \
+  && echo "export LC_ALL=C" >> /root/.bashrc \
+  && source /root/.bashrc \
   && dpkg-reconfigure locales \
   && rm -rf /var/lib/apt/lists/*
