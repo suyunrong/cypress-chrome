@@ -38,7 +38,6 @@ RUN apt-get update \
     locales \
   && locale-gen ${LANGUAGE} \
   && dpkg-reconfigure --frontend noninteractive locales \
-  && apt-get -qyy autoremove \
   && rm -rf /var/lib/apt/lists/*
 
 # avoid too many progress messages
