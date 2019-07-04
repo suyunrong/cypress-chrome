@@ -9,6 +9,7 @@ ENV LANG C.UTF-8
 ENV TZ "Asia/Shanghai"
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
+    apt-utils \
     tzdata \
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/TZ \
